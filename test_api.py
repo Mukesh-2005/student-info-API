@@ -11,7 +11,7 @@ BASE_URL = "http://127.0.0.1:8000"
 def print_response(title, response):
     """Pretty print API responses"""
     print(f"\n{'='*60}")
-    print(f"📌 {title}")
+    print(f" {title}")
     print(f"{'='*60}")
     print(f"Status Code: {response.status_code}")
     try:
@@ -23,10 +23,10 @@ def print_response(title, response):
 def test_api():
     """Test all CRUD operations"""
     
-    print("🚀 Starting Student Info API Tests...\n")
+    print(" Starting Student Info API Tests...\n")
     
     # 1. CREATE - Add students
-    print("\n1️⃣  CREATING STUDENTS...")
+    print("\n1️ CREATING STUDENTS...")
     
     students_data = [
         {
@@ -60,19 +60,19 @@ def test_api():
             created_ids.append(response.json()['id'])
     
     # 2. READ - Get all students
-    print("\n\n2️⃣  READING ALL STUDENTS...")
+    print("\n\n READING ALL STUDENTS...")
     response = requests.get(f"{BASE_URL}/students/")
     print_response("All Students", response)
     
     # 3. READ - Get single student
     if created_ids:
-        print("\n\n3️⃣  READING SINGLE STUDENT...")
+        print("\n\n  READING SINGLE STUDENT...")
         response = requests.get(f"{BASE_URL}/students/{created_ids[0]}")
         print_response(f"Student with ID {created_ids[0]}", response)
     
     # 4. UPDATE - Update student
     if created_ids:
-        print("\n\n4️⃣  UPDATING STUDENT...")
+        print("\n\n  UPDATING STUDENT...")
         update_data = {
             "gpa": 4.0,
             "grade": "A+"
@@ -81,13 +81,13 @@ def test_api():
         print_response(f"Updated Student {created_ids[0]}", response)
     
     # 5. SEARCH - Search by name
-    print("\n\n5️⃣  SEARCHING STUDENTS...")
+    print("\n\n SEARCHING STUDENTS...")
     response = requests.get(f"{BASE_URL}/students/search/Alice")
     print_response("Search Results for 'Alice'", response)
     
     # 6. DELETE - Delete a student
     if len(created_ids) > 1:
-        print("\n\n6️⃣  DELETING STUDENT...")
+        print("\n\n  DELETING STUDENT...")
         response = requests.delete(f"{BASE_URL}/students/{created_ids[-1]}")
         print_response(f"Deleted Student {created_ids[-1]}", response)
         
@@ -96,9 +96,9 @@ def test_api():
         print_response("Students After Deletion", response)
     
     print("\n\n" + "="*60)
-    print("✅ All tests completed!")
+    print(" All tests completed!")
     print("="*60)
-    print("\n💡 Tip: Visit http://127.0.0.1:8000/docs for interactive API documentation")
+    print("\n Tip: Visit http://127.0.0.1:8000/docs for interactive API documentation")
 
 
 if __name__ == "__main__":
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         if response.status_code == 200:
             test_api()
         else:
-            print("❌ Server responded with an error")
+            print(" Server responded with an error")
     except requests.exceptions.ConnectionError:
         print("❌ Error: Cannot connect to the API server!")
         print("📝 Make sure the server is running with: uvicorn main:app --reload")
